@@ -31,34 +31,6 @@ class CustomAuthController extends Controller
   
         return redirect("login");
     }
-
-    public function registration()
-    {
-        return view('auth.registration');
-    }
-      
-    public function customRegistration(Request $request)
-    {  
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-        ]);
-           
-        $data = $request->all();
-        $check = $this->create($data);
-         
-        return redirect("dashboard");
-    }
-
-    public function create(array $data)
-    {
-      return User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password'])
-      ]);
-    }    
     
     public function dashboard()
     {
@@ -69,6 +41,48 @@ class CustomAuthController extends Controller
         return redirect("login");
     }
     
+    public function customTeacher(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+        ]);
+           
+        $teacher = $request->all();
+        $check = $this->addTeacher($teacher);
+         
+        return redirect("dashboard");        
+    }
+
+    public function addTeacher(array $teacher)
+    {
+        return User::create([
+            'name' => $teacher['name'],
+            'email' => $teacher['email'],
+            'password' => Hash::make($teacher['password']),
+            'role_id' => 2
+        ]);
+    }
+
+    public function classTeacher()
+    {
+        if(Auth::check()){
+            return view('class.teacher');
+        }
+  
+        return redirect("login");
+    }
+
+    public function classStudent()
+    {
+        if(Auth::check()){
+            return view('class.student');
+        }
+  
+        return redirect("login");
+    }
+
     public function signOut() {
         Session::flush();
         Auth::logout();

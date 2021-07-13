@@ -22,7 +22,7 @@ class UsersSeeder extends Seeder
                 'name'      =>  'admin',
                 'email'     =>  'admin@gmail.com',
                 'password'  =>  Hash::make('admin'),
-                'remember_token'    =>  str_random(10)
+                'role_id'   =>  1,
             ],
         ];
 
