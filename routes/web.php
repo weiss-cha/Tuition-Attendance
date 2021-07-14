@@ -10,12 +10,13 @@ use App\Http\Controllers\CustomAuthController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard'); 
-Route::get('login', [CustomAuthController::class, 'index'])->name('login');
-Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom'); 
-Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom'); 
+Route::get('dashboard-admin', [CustomAuthController::class, 'dashboardAdmin'])->name('admin.dashboard'); 
+Route::get('admin-home', [CustomAuthController::class, 'homeAdmin'])->name('admin.home');
+Route::get('teacher-home', [CustomAuthController::class, 'homeTeacher'])->name('teacher.home');
+Route::post('admin-login', [CustomAuthController::class, 'adminLogin'])->name('login.admin'); 
+Route::post('teacher-login', [CustomAuthController::class, 'teacherLogin'])->name('login.teacher'); 
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 Route::post('custom-teacher', [CustomAuthController::class, 'customTeacher'])->name('teacher.custom');
 Route::get('class-teacher', [CustomAuthController::class, 'classTeacher'])->name('teacher.class'); 
 Route::get('class-student', [CustomAuthController::class, 'classStudent'])->name('student.class'); 
+Route::get('dashboard-teacher', [CustomAuthController::class, 'dashboardTeacher'])->name('teacher.dashboard');

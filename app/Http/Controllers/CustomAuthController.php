@@ -11,34 +11,64 @@ use Illuminate\Support\Facades\Auth;
 class CustomAuthController extends Controller
 {
 
-    public function index()
+    public function homeAdmin()
     {
-        return view('auth.login');
+        return view('admin.login');
+    }  
+
+    public function homeTeacher()
+    {
+        return view('teacher.login');
     }  
       
-    public function customLogin(Request $request)
+    public function adminLogin(Request $request)
     {
         $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
    
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard');
-
+        $email = $request->input('email');
+        $password = $request->input('password');
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'role_id' => 1])) {
+            return redirect()->intended('dashboard-admin');
         }
   
-        return redirect("login");
+        return redirect("admin-home");
+    }
+
+    public function teacherLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+   
+        $email = $request->input('email');
+        $password = $request->input('password');
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'role_id' => 2])) {
+            return redirect()->intended('dashboard-teacher');
+        }
+  
+        return redirect("teacher-home");
     }
     
-    public function dashboard()
+    public function dashboardAdmin()
     {
         if(Auth::check()){
-            return view('dashboard');
+            return view('admin.dashboard');
         }
   
-        return redirect("login");
+        return redirect("admin-home");
+    }
+
+    public function dashboardTeacher()
+    {
+        if(Auth::check()){
+            return view('teacher.dashboard');
+        }
+  
+        return redirect("teacher-home");
     }
     
     public function customTeacher(Request $request)
@@ -52,7 +82,7 @@ class CustomAuthController extends Controller
         $teacher = $request->all();
         $check = $this->addTeacher($teacher);
          
-        return redirect("dashboard");        
+        return redirect("dashboard-admin");        
     }
 
     public function addTeacher(array $teacher)
@@ -68,25 +98,25 @@ class CustomAuthController extends Controller
     public function classTeacher()
     {
         if(Auth::check()){
-            return view('class.teacher');
+            return view('admin.class.teacher');
         }
   
-        return redirect("login");
+        return redirect("admin-home");
     }
 
     public function classStudent()
     {
         if(Auth::check()){
-            return view('class.student');
+            return view('admin.class.student');
         }
   
-        return redirect("login");
+        return redirect("admin-home");
     }
 
     public function signOut() {
         Session::flush();
         Auth::logout();
   
-        return Redirect('login');
+        return Redirect('admin-home');
     }
 }

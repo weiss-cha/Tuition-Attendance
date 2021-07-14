@@ -25,13 +25,7 @@
                     </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.dashboard') }}">Add Teacher</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('teacher.class') }}">Assign Class (Teacher)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('student.class') }}">Assign Class (Student) </a>
+                        <a class="nav-link" href="{{ route('teacher.dashboard') }}">Attendance</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
