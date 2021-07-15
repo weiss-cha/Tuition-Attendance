@@ -23,6 +23,7 @@ Route::get('dashboard-admin', [AddTeacherController::class, 'dashboardAdmin'])->
 Route::post('custom-teacher', [AddTeacherController::class, 'customTeacher'])->name('teacher.custom');
 
 Route::get('class-teacher', [TeacherClassController::class, 'classTeacher'])->name('teacher.class'); 
+Route::get('custom-class', [TeacherClassController::class, 'customClass'])->name('custom.class'); 
 
 Route::get('class-student', [StudentClassController::class, 'classStudent'])->name('student.class'); 
 

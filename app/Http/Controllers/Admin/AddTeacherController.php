@@ -30,7 +30,7 @@ class AddTeacherController extends Controller
         $teacher = $request->all();
         $check = $this->addTeacher($teacher);
          
-        return redirect("dashboard-admin");        
+        return redirect("dashboard-admin")->with('success', 'Teacher Added');       
     }
 
     public function addTeacher(array $teacher)

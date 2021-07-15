@@ -9,6 +9,12 @@
                     <h3 class="card-header text-center">Add Teacher</h3>
                     <div class="card-body">
 
+                        @if(\Session::has('success'))
+                            <div class="alert alert-success">
+                                <p>{{ \Session::get('success') }}</p>
+                            </div>
+                        @endif
+                        
                         <form action="{{ route('teacher.custom') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
