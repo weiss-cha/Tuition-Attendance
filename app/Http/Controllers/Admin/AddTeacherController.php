@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Hash;
+use DB;
 
 class AddTeacherController extends Controller
 {
     public function dashboardAdmin()
     {
         if(Auth::check()){
-            return view('admin.dashboard');
+            $userList = User::select('name')->where('name', '!=', 'admin')->get();
+            return view('admin.dashboard', compact('userList'));
         }
   
         return redirect("admin-home");
@@ -41,5 +43,22 @@ class AddTeacherController extends Controller
             'password' => Hash::make($teacher['password']),
             'role_id' => 2
         ]);
+    }
+
+    public function removeTeacher(Request $request)
+    {
+        $request->validate([
+            'teacher_2' => 'required',
+        ]);
+           
+        $teacher_2 = $request->teacher_2;
+        $check = $this->deleteClass($teacher_2);
+    
+        return redirect("dashboard-admin")->with('success', 'Teacher Removed');
+    }
+
+    public function deleteClass($teacher_2)
+    {
+        DB::table('users')->where('name', "{$teacher_2}")->delete();
     }
 }

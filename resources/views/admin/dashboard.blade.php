@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card">
-                    <h3 class="card-header text-center">Add Teacher</h3>
+                    <h4 class="card-header text-center">Add Teacher</h4>
                     <div class="card-body">
 
                         @if(\Session::has('success'))
@@ -45,7 +45,24 @@
                                 <button type="submit" class="btn btn-dark btn-block">Add</button>
                             </div>
                         </form>
-
+                    </div>
+                </div>    
+                &nbsp;
+                <div class="card">    
+                    <h4 class="card-header text-center">Remove Teacher</h4>
+                    <div class="card-body">
+                        <form method="ANY" action="{{ route('teacher.remove') }}">
+                            <label>Select Teacher to Remove:</label>
+                            <select name="teacher_2" id="id" class="form control input -sm">
+                                @foreach ($userList as $item)
+                                    <option>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                            <hr>
+                            <div class="d-grid mx-auto">
+                                <button type="submit" class="btn btn-dark btn-block">Remove</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

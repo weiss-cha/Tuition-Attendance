@@ -21,9 +21,11 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 
 Route::get('dashboard-admin', [AddTeacherController::class, 'dashboardAdmin'])->name('admin.dashboard'); 
 Route::post('custom-teacher', [AddTeacherController::class, 'customTeacher'])->name('teacher.custom');
+Route::get('remove-teacher', [AddTeacherController::class, 'removeTeacher'])->name('teacher.remove');
 
 Route::get('class-teacher', [TeacherClassController::class, 'classTeacher'])->name('teacher.class'); 
 Route::get('custom-class', [TeacherClassController::class, 'customClass'])->name('custom.class'); 
+Route::get('remove-class', [TeacherClassController::class, 'removeClass'])->name('remove.class'); 
 
 Route::get('class-student', [StudentClassController::class, 'classStudent'])->name('student.class'); 
 
