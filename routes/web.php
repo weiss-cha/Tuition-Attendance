@@ -28,5 +28,7 @@ Route::get('custom-class', [TeacherClassController::class, 'customClass'])->name
 Route::get('remove-class', [TeacherClassController::class, 'removeClass'])->name('remove.class'); 
 
 Route::get('class-student', [StudentClassController::class, 'classStudent'])->name('student.class'); 
+Route::get('custom-student', [StudentClassController::class, 'customStudent'])->name('custom.student'); 
+Route::get('remove-student', [StudentClassController::class, 'removeStudent'])->name('remove.student'); 
 
 Route::get('dashboard-teacher', [AttendanceController::class, 'dashboardTeacher'])->name('teacher.dashboard');
