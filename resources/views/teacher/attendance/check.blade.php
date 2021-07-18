@@ -7,33 +7,27 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-  
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3 align="center">Student List</h3>
-                                    <br>
-                                    <table class="table table-bordered table-striped">
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Name</th>
-                                                <th>{{$date}}</th>
-                                            </tr>
-                                            
-     
-                                            @foreach($attendance_array as $row)
-                                            <tr>
-                                                
-                                                <td>{{$row['id']}}</td>
-                                                <td>{{$row['student_name']}}</td>             
-                                                <td><?php echo $row["{$date}"]; ?></td>
-                                            </tr>
-                                            @endforeach
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 align="center">Student List</h3>
+                                <p align="right">*Present = 1, Absent = 0</p>
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Name</th>
+                                        <th>{{$date}}</th>
+                                    </tr>
 
-
-                                    </table>
-                                </div>
+                                    @foreach($attendance_array as $row)
+                                    <tr>
+                                         <td>{{$row['id']}}</td>
+                                         <td>{{$row['student_name']}}</td>             
+                                        <td><?php echo $row["{$date}"]; ?></td>
+                                    </tr>
+                                    @endforeach
+                                </table>
                             </div>
-
+                        </div>
                     </div>
                 </div>    
             </div>

@@ -38,7 +38,7 @@
                                         @endforeach
                                     </table>
 
-                                    <div align="right" >
+                                    <div align="right">
                                         <input type="hidden" id="class" name="class" value="{{$class}}">
                                         <button type="submit" class="btn btn-primary">Take Attendance</button>
                                     </div> 
