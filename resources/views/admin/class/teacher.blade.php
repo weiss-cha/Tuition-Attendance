@@ -50,6 +50,13 @@
                                 <span class="text-danger">{{ $errors->first('class_name_2') }}</span>
                                 @endif
                             </div>
+                            <label>Select Teacher to Remove Class:</label>
+                            <select name="teacher_2" id="id_2" class="form control input -sm">
+                                @foreach ($userList as $item)
+                                    <option>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                            <hr>
                             <div class="d-grid mx-auto">
                                 <button type="submit" class="btn btn-dark btn-block">Remove</button>
                             </div>

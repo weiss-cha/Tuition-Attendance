@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use DB;
 
 class CustomAuthController extends Controller
 {
@@ -21,13 +22,13 @@ class CustomAuthController extends Controller
     public function adminLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'name' => 'required',
             'password' => 'required',
         ]);
    
-        $email = $request->email;
+        $name = $request->name;
         $password = $request->password;
-        if (Auth::attempt(['email' => $email, 'password' => $password, 'role_id' => 1])) {
+        if (Auth::attempt(['name' => $name, 'password' => $password, 'role_id' => 1])) {
             return redirect()->intended('dashboard-admin');
         }
   
@@ -37,14 +38,15 @@ class CustomAuthController extends Controller
     public function teacherLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'name' => 'required',
             'password' => 'required',
         ]);
    
-        $email = $request->email;
+        $name = $request->name;
         $password = $request->password;
-        if (Auth::attempt(['email' => $email, 'password' => $password, 'role_id' => 2])) {
-            return redirect()->intended('dashboard-teacher');
+        if (Auth::attempt(['name' => $name, 'password' => $password, 'role_id' => 2])) {
+            $classList = DB::table("{$name}")->select('class_name')->get();
+            return view('teacher.dashboard')->with('classList', $classList)->with('name', $name);
         }
   
         return redirect("teacher-home");

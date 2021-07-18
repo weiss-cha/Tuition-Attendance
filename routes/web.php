@@ -31,4 +31,7 @@ Route::get('class-student', [StudentClassController::class, 'classStudent'])->na
 Route::get('custom-student', [StudentClassController::class, 'customStudent'])->name('custom.student'); 
 Route::get('remove-student', [StudentClassController::class, 'removeStudent'])->name('remove.student'); 
 
-Route::get('dashboard-teacher', [AttendanceController::class, 'dashboardTeacher'])->name('teacher.dashboard');
+Route::get('custom-attendance', [AttendanceController::class, 'customAttendance'])->name('custom.attendance');
+Route::get('take-attendance', [AttendanceController::class, 'takeAttendance'])->name('take.attendance');
+Route::get('date-attendance', [AttendanceController::class, 'dateAttendance'])->name('date.attendance');
+Route::get('check-attendance', [AttendanceController::class, 'checkAttendance'])->name('check.attendance');

@@ -48,12 +48,8 @@ class TeacherClassController extends Controller
 
     public function assignClass($class_name, $teacher)
     {
-        Schema::table('users', function (Blueprint $table) use($class_name) {
-            $table->boolean("permission_{$class_name}");
-        });
-  
-        DB::table('users') -> where('name', "{$teacher}") -> update([
-            "permission_{$class_name}" => true,
+        DB::table("{$teacher}")  ->  insert([
+            'class_name' =>  "{$class_name}",      
         ]);
     }
 
@@ -61,23 +57,20 @@ class TeacherClassController extends Controller
     {
         $request->validate([
             'class_name_2' => 'required',
+            'teacher_2' => 'required',
         ]);
            
         $class_name_2 = $request->class_name_2;
-        $check = $this->deleteClass($class_name_2);
+        $teacher_2 = $request->teacher_2;
+        $check = $this->deleteClass($class_name_2, $teacher_2);
     
         return redirect("class-teacher")->with('success', 'Class Removed');
     }
 
-    public function deleteClass($class_name_2)
+    public function deleteClass($class_name_2, $teacher_2)
     {
         Schema::dropIfExists("{$class_name_2}");
 
-        if (Schema::hasColumn('users', "permission_{$class_name_2}"))
-        {
-            Schema::table('users', function (Blueprint $table)  use($class_name_2)  {
-                $table->dropColumn("permission_{$class_name_2}");
-            });
-        }
+        DB::table("{$teacher_2}")->where('class_name', "{$class_name_2}")->delete();
     }
 }

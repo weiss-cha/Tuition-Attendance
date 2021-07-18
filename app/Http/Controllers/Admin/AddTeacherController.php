@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 use Hash;
 use DB;
@@ -31,6 +33,7 @@ class AddTeacherController extends Controller
            
         $teacher = $request->all();
         $check = $this->addTeacher($teacher);
+        $check = $this->addTeacherClass($teacher);
          
         return redirect("dashboard-admin")->with('success', 'Teacher Added');       
     }
@@ -45,6 +48,14 @@ class AddTeacherController extends Controller
         ]);
     }
 
+    public function addTeacherClass(array $teacher)
+    {
+        return Schema::create($teacher['name'], function (Blueprint $table) use($teacher) {
+            $table->id();
+            $table->string('class_name');
+        });
+    }
+
     public function removeTeacher(Request $request)
     {
         $request->validate([
@@ -52,13 +63,19 @@ class AddTeacherController extends Controller
         ]);
            
         $teacher_2 = $request->teacher_2;
-        $check = $this->deleteClass($teacher_2);
+        $check = $this->deleteTeacher($teacher_2);
+        $check = $this->deleteTeacherClass($teacher_2);
     
         return redirect("dashboard-admin")->with('success', 'Teacher Removed');
     }
 
-    public function deleteClass($teacher_2)
+    public function deleteTeacher($teacher_2)
     {
         DB::table('users')->where('name', "{$teacher_2}")->delete();
+    }
+
+    public function deleteTeacherClass($teacher_2)
+    {
+        Schema::dropIfExists("{$teacher_2}");
     }
 }
