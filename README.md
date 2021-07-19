@@ -9,7 +9,13 @@ A Laravel project to manage student's attendance.
 - Teacher able to check attendance for assigned classes.
 
 ## How to Use
-Modify the **.env** file according to your database connected. 
+Create a new **Laravel** project in an empty folder using **Composer**.
+
+```console
+composer create-project laravel/laravel --prefer-dist ./
+```
+
+Move all downloaded files into the project created. Then, modify the **.env** file according to your database connected. 
 
 ![](https://i.imgur.com/KIKWTRD.png)
 
